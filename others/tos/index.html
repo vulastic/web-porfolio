@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- inline style sheet -->
+    <style type="text/css">
+      body {
+        text-align: center;
+        text-decoration: none;
+        margin: 0 auto;
+        max-width: 1024px;
+      }
+      div {
+        width: auto;
+        border: solid 1px #a2a4a5;
+        border-radius: 4px;
+        padding: 10px;
+      }
+      table {
+        font-size: 1.0rem;
+        padding: 10px;
+        width: 100%;
+        table-layout: fixed;
+      }
+      th {
+        padding-bottom: 10px;
+      }
+      input, select {
+        width: 90%;
+        height: 32px;
+        text-align: center;
+        font-size: 1.0rem;
+        border: 1px solid rgb(118, 118, 118);
+        border-radius: 4px;
+      }
+      select {
+        height: 35.6px
+      }
+      .green-bar {
+        border-left: thick solid #3dba3d;
+        margin-left: 3px;
+      }
+      .left-aligned {
+        padding-left: 10px;
+        text-align: left;
+      }
+      @media (max-width: 1024px) {
+        
+      }
+      @media (max-width: 1023px) {
+        body {
+          padding: 0 10px;
+          max-width: 1024px;
+          min-width: 320px;
+        }
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function() {
+        var tip = document.getElementById("tip");
+        var pos = document.getElementById("pos");
+        var shop = document.getElementById("shopify");
+        var cash = document.getElementById("cash");
+        var number = document.getElementById("number");
+
+        function listener(event) {
+          // taxes
+          const tax_pos = 0.95;
+          const tax_shop = 0.971;
+          const tax_cash = 1.0;
+
+          let p = pos.value;
+          let s = shop.value;
+          let c = cash.value;
+          let n = number.value;
+
+          let tips = ((p * tax_pos) + (s * tax_shop) + (c * tax_cash)) / n;
+
+          tip.textContent = tips.toFixed(2) + " CAD"
+        }
+        
+        pos.addEventListener("input", listener);
+        shop.addEventListener("input", listener);
+        cash.addEventListener("input", listener);
+        number.addEventListener("input", listener);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Taste of Seoul Tip Calculator</h1>
+    <br>
+    <h2 class="left-aligned green-bar">Inputs</h2>
+    <div>
+      <table>
+        <tr>
+          <th>POS</th>
+          <th>Shopify</th>
+          <th>Cash</th>
+          <th>Number of People</th>
+        </tr>
+        <tr>
+          <td>
+            <input id="pos" type="number" min="0"></input>
+          </td>
+          <td>
+            <input id="shopify" type="number" min="0"></input>
+          </td>
+          <td>
+            <input id="cash" type="number" min="0"></input>
+          </td>
+          <td>
+            <select id="number">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5" selected>5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <h2 class="left-aligned green-bar">Results</h2>
+    <div>
+      <h3 class="left-aligned">Your Tip is ...</h3>
+      <h2 id="tip">0.00 CAD</h2>
+    </div>
+  </body>
+</html>
